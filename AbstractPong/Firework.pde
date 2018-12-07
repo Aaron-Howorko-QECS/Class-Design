@@ -1,31 +1,44 @@
-class Firework extends Ball {
-  float gravity;
-  float xSpeed;
-  float ySpeed;
-  float radius;
-  float c;
+final class Firework extends Ball {
+  private float radius;
+  private color c;
+  private float g;
+  private float xSpeed;
+  private float ySpeed;
 
-  Firework(float x, float y, float radius, color c) {
-    super(x, y, radius, c);
-    this.gravity = 0.5;
-    this.xSpeed = random(-20, 20);
-    this.ySpeed = random(-20, 20);
-    this.c = color( int(random(255)), int(random(255)), int(random(255)) );
+
+  Firework(float x, float y) {
+    super(x, y);
+    this.radius = random(2, 9);
+    this.c = color(random(255), random(255), random(255));
+    this.g = 0.5;
+    this.xSpeed = random(-5, 5);
+    this.ySpeed = random(-5, 5);
   }
-  public void CreateFirework() {
-    for (int i=0; i < firework.length; i++) {
-      //firework[i] = new Firework(ball.getX(),)
+
+  public void createFirework() {
+    for (int i = 0; i < firework.length; i++) {
+      firework[i] = new Firework(ball.getX(), ball.getY());
     }
   }
-
-  void step() {
+  
+  public void move() {
     x += xSpeed;
     y += ySpeed;
-    ySpeed += gravity;
+    ySpeed += g;
   }
-  void draw() {
+  
+  public void draw() {
+    
     fill(c);
-    ellipse(x, y, 2*radius, 2* radius);
-    //if (ball.getX() - ball.getRadius() <= 5);
+    ellipse(x, y, radius, radius);
+    if (ball.getX() - ball.getRadius() <= 5) {
+      createFirework();
+    }
+    if (ball.getX() + ball.getRadius() >= 595) {
+      createFirework();
+    }
+  }
+  
+  void score() {
   }
 }

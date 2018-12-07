@@ -1,22 +1,29 @@
 ArrayList<Shape> shapes = new ArrayList<Shape>();
-Firework[] firework = new Firework[25];
+Firework[] firework;
 public static int [] scoreNum = new int[2];
 public static boolean [] keys = new boolean[4];
+public Ball ball;
 Left leftPaddle;
 Right rightPaddle;
+
 
 void setup() {
   size(600, 600);
   ellipseMode(RADIUS);
-  
 
-  Ball ball = new Ball(width*1/2, height*1/2, 10, color(#420DAB));
+
+  ball = new Ball(width*1/2, height*1/2);
   leftPaddle = new Left(width*6/64, height*3/8, width/64, height/4);
   rightPaddle = new Right(width*57/64, height*3/8, width/64, height/4);
+  firework = new Firework[15];
+
 
   shapes.add(ball);
   shapes.add(leftPaddle);
   shapes.add(rightPaddle);
+  for (int i = 0; i < firework.length; i++) {
+    firework[i] = new Firework(0, 10000);
+  }
 }
 
 void draw() {
@@ -31,6 +38,10 @@ void draw() {
     shapes.get(i).draw();
     shapes.get(i).move();
     shapes.get(0).score();
+  }
+  for (int i = 0; i < firework.length; i++) {
+    firework[i].draw();
+    firework[i].move();
   }
 }
 

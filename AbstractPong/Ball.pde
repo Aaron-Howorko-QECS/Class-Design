@@ -1,19 +1,18 @@
 class Ball extends Shape {
   private float radius; 
-  private color c;
+
   private float xSpeed;
   private float ySpeed;
 
-  Ball(float x, float y, float radius, color c) {
+  Ball(float x, float y) {
     super(x, y);
-    this.radius = radius;
-    this.c = c;
+    this.radius = width/64;
     this.xSpeed = random(-3, 3);
     this.ySpeed = random(-3, 3);
   }
 
   void draw() {
-    fill(c);
+    fill(0);
     ellipse(x, y, radius, radius);
   }
 
@@ -66,17 +65,14 @@ class Ball extends Shape {
   public void score() {
     println("p1 score: " + AbstractPong.scoreNum[0] + " p2 score: " + AbstractPong.scoreNum[1]);
   }
-  public float X() {
+  public float getX() {
     return x;
   }
-  public float Y() {
+  public float getY() {
     return y;
   }
   public float getRadius() {
     return radius;
-  }
-  public  color getC() {
-    return c;
   }
   public float XSpeed() {
     return xSpeed;
